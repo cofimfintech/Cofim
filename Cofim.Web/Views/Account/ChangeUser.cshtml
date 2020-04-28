@@ -1,0 +1,129 @@
+﻿@model Cofim.Web.Models.ViewModel.EditUserViewModel
+
+@{
+    ViewData["Title"] = ViewBag.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- Main -->
+<div id="main">
+    <h4>@ViewBag.Title</h4>
+
+    <hr />
+
+    <div id="tabs">
+        <ul>
+            <li><a href="#tabs-1">Perfil</a></li>
+            <li><a href="#tabs-2">Cambiar Contraseña</a></li>
+        </ul>
+        <div id="tabs-1">
+            <form asp-action="ChangeUser">
+                <input type="hidden" asp-for="OldPassword" />
+                <input type="hidden" asp-for="NewPassword" />
+                <input type="hidden" asp-for="Confirm" />
+                <div class="row">
+                    <div class="col-md-8">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="FirstName" class="control-label"></label>
+                            <input asp-for="FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="LastName" class="control-label"></label>
+                            <input asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="CellPhone" class="control-label"></label>
+                            <input asp-for="CellPhone" class="form-control" />
+                            <span asp-validation-for="CellPhone" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="submit" value="Guardar Cambios" class="btn btn-primary" />
+                            <a asp-action="Login" class="btn btn-secondary">Cancelar</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+            </form>
+        </div>
+        <div id="tabs-2">
+            <form asp-action="ChangePassword">
+                <input type="hidden" asp-for="FirstName" />
+                <input type="hidden" asp-for="LastName" />
+                <input type="hidden" asp-for="CellPhone" />
+                <div class="row">
+                    <div class="col-md-8">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="OldPassword">Contraseña actual</label>
+                            <input asp-for="OldPassword" type="password" class="form-control" />
+                            <span asp-validation-for="OldPassword" class="text-warning"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="NewPassword">Nueva contraseña</label>
+                            <input asp-for="NewPassword" type="password" class="form-control" />
+                            <span asp-validation-for="NewPassword" class="text-warning"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Confirm">Confirmación de la nueva contraseña</label>
+                            <input asp-for="Confirm" type="password" class="form-control" />
+                            <span asp-validation-for="Confirm" class="text-warning"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="submit" value="Cambiar Contraseña" class="btn btn-primary" />
+                            <a asp-action="Login" class="btn btn-secondary  ">Cancelar</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<!-- Main -->
+@section Scripts
+{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#tabs").tabs({ active: 0 });
+
+        });
+    </script>
+}
+
+

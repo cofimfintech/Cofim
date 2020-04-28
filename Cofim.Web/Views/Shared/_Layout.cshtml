@@ -1,0 +1,84 @@
+﻿@{ var menuRight = ViewBag?.MenuRight == null ? new List<Cofim.Common.Model.Menu>() : ViewBag?.MenuRight; }
+
+@{ var menuLeft = ViewBag?.MenuLeft == null ? new List<Cofim.Common.Model.Menu>() : ViewBag?.MenuLeft; }
+
+@{ var headerClass = ViewBag?.headerClass == null ?  "headerPortal" : "header" ; }
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"] - Portal COFIM</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <!-- CSS Template-->
+    <link rel="stylesheet" href="@Href("~/assets/css/main.css")" />
+    <noscript><link rel="stylesheet" href="@Href("~/assets/css/noscript.css")" /></noscript>
+    <!-- CSS Template-->
+    <!-- CSS  MVC ASP.NET-->
+    <link rel="stylesheet" href="@Href("~/lib/bootstrap/dist/css/bootstrap.min.css")" />
+    <link rel="stylesheet" href="@Href("~/assets/css/site.css")" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- CSS  MVC ASP.NET-->
+</head>
+<body class="is-preload">
+    <!-- Wrapper -->
+    <div id="wrapper" class=@ViewBag?.ClassIni>
+
+        @Html.Raw((String)@ViewBag?.Intro)
+
+        <!-- Header -->
+        <header id="@headerClass">
+            <a asp-controller="Home" asp-action="Index" class="logo"><img src="@Url.Content("~/images/LogoCOFIM.jpg")" alt="" /></a>
+        </header>
+        <!-- Header -->
+        <!-- Nav -->
+        <nav id="nav">
+            <ul class="links">
+                @foreach (var m in @menuLeft)
+                {
+                    <li><a asp-controller="@m.Controller" asp-action="@m.PageName"><i class="@m.Icon"></i> @m.Title </a> </li>
+                }
+            </ul>
+            <ul class="icons">
+                @foreach (var m in @menuRight)
+                {
+                    <li><a asp-area="" asp-controller="@m.Controller" asp-action="@m.PageName"><i class="@m.Icon"></i> @m.Title </a> </li>
+                }
+                <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+                <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+                <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+            </ul>
+        </nav>
+        <!-- Nav -->
+
+        @RenderBody()
+
+        <!-- Copyright -->
+        <div id="copyright">
+            <ul>
+                <li> <a asp-area="" asp-controller="Home" asp-action="Privacy"><i class="fa fa-file"></i> Política de Privacidad</a></li>
+                <li>&copy; @DateTime.Now.Year - Portal Cofim</li>
+            </ul>
+        </div>
+        <!-- Copyright -->
+
+    </div>
+    <!-- Wrapper -->
+    <!-- Scripts MVC ASP.NET-->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+    <!-- Scripts MVC ASP.NET-->
+    <!-- Scripts Template-->
+    <script src="@Href("~/assets/js/jquery.scrollex.min.js")"></script>
+    <script src="@Href("~/assets/js/jquery.scrolly.min.js")"></script>
+    <script src="@Href("~/assets/js/browser.min.js")"></script>
+    <script src="@Href("~/assets/js/breakpoints.min.js")"></script>
+    <script src="@Href("~/assets/js/util.js")"></script>
+    <script src="@Href("~/assets/js/main.js")"></script>
+    <!-- Scripts Template-->
+
+</body>
+</html>

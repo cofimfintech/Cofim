@@ -1,0 +1,112 @@
+﻿@using Syncfusion.EJ2
+
+@{
+    Layout = "~/Views/Shared/_LayoutPortal.cshtml";
+    ViewData["Title"] = "Home";
+ }
+
+@model Cofim.Common.Model.spacingModel
+
+<!-- Main -->
+    <div id="main">
+
+        <div class=" control-section">
+            <!--  DashboardLayout element declaration -->
+            <ejs-dashboardlayout id="defaultLayout" columns="6" cellSpacing="@Model.CellSpacing">
+                <e-content-template>
+                    <div id="one" class="e-panel" data-row="0" data-col="0" data-sizeX="1" data-sizeY="1">
+                        <div class="e-panel-container">
+                            <div class="text-align">0</div>
+                        </div>
+                    </div>
+                    <div id="two" class="e-panel" data-row="1" data-col="0" data-sizeX="1" data-sizeY="2">
+                        <div class="e-panel-container">
+                            <div><ejs-calendar id="calendar"></ejs-calendar></div>
+                        </div>
+                    </div>
+                    <div id="three" class="e-panel" data-row="0" data-col="1" data-sizeX="2" data-sizeY="2">
+                        <div class="e-panel-container">
+                            <ejs-grid id="Grid" dataSource="@ViewBag.datasource" allowPaging="true">
+                                <e-grid-pagesettings pageCount="5"></e-grid-pagesettings>
+                                <e-grid-columns>
+                                    <e-grid-column field="Id" headerText="ID" width="120" textAlign="Right"></e-grid-column>
+                                    <e-grid-column field="Tipo" headerText="Tipo" width="150"></e-grid-column>
+                                    <e-grid-column field="Descripcion" headerText="Desc" width="150"></e-grid-column>
+                                </e-grid-columns>
+                            </ejs-grid>
+                        </div>
+                    </div>
+                    <div id="four" class="e-panel" data-row="2" data-col="1" data-sizeX="1" data-sizeY="1">
+                        <div class="e-panel-container">
+                            <div class="text-align">3</div>
+                        </div>
+                    </div>
+                    <div id="five" class="e-panel" data-row="2" data-col="2" data-sizeX="2" data-sizeY="1">
+                        <div class="e-panel-container">
+                            <div class="text-align">4</div>
+                        </div>
+                    </div>
+                    <div id="six" class="e-panel" data-row="0" data-col="3" data-sizeX="1" data-sizeY="1">
+                        <div class="e-panel-container">
+                            <div class="text-align">5</div>
+                        </div>
+                    </div>
+                    <div id="seven" class="e-panel" data-row="1" data-col="3" data-sizeX="1" data-sizeY="1">
+                        <div class="e-panel-container">
+                            <div class="text-align">6</div>
+                        </div>
+                    </div>
+                    <div id="eight" class="e-panel" data-row="0" data-col="4" data-sizeX="1" data-sizeY="3">
+                        <div class="e-panel-container">
+                            <div class="text-align">7</div>
+                        </div>
+                    </div>
+                </e-content-template>
+            </ejs-dashboardlayout>
+            <!-- end of dashboardlayout element -->
+        </div>
+
+        <style>
+            /* DashboardLayout element styles  */
+            #defaultLayout {
+                padding: 10px;
+            }
+
+                #defaultLayout .e-panel .e-panel-container {
+                    vertical-align: middle;
+                    font-weight: 600;
+                    font-size: 20px;
+                    text-align: center;
+                }
+
+            .text-align {
+                line-height: 160px;
+            }
+        </style>
+
+
+
+        <!-- Featured Post
+    <article class="post featured">
+        <header class="major">
+            <span class="date">April 25, 2017</span>
+            <h2>
+                <a href="#">
+                   COMPARADOR DE FONDOS DE INVERSIÓN
+                </a>
+            </h2>
+            <p>
+                Aenean ornare velit lacus varius enim ullamcorper proin aliquam<br />
+                facilisis ante sed etiam magna interdum congue. Lorem ipsum dolor<br />
+                amet nullam sed etiam veroeros.
+            </p>
+        </header>
+        <a href="#" class="image main"><img src="images/pic01.jpg" alt="" /></a>
+        <ul class="actions special">
+            <li><a href="#" class="button large">Full Story</a></li>
+        </ul>
+    </article>
+     Featured Post -->
+
+    </div>
+<!-- Main -->
