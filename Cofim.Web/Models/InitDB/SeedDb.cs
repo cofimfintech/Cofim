@@ -22,6 +22,7 @@ namespace Cofim.Web.Models.InitDB
         {
             await _context.Database.EnsureCreatedAsync();            
             await CheckFormasDePagoAsync();
+            await CheckTipoAdquirenteAsync();
             await CheckRoles();
             await CheckUserAsync( "Eduardo", "Admin"    , "ems@convivere.mx"              , "350 634 2747", "admin123" , RolesWebApp.Admin);
             await CheckUserAsync( "Alvaro" , "Admin"    , "alvarosolares1@hotmail.com"    , "350 634 2747", "admin123" , RolesWebApp.Admin);
@@ -47,7 +48,18 @@ namespace Cofim.Web.Models.InitDB
                 _context.FormasDePago.Add(new FormaDePago { Tipo = "-"    , IdOpenPay = 0, Nombre = "Seleccione un método de Pago", Descripcion = "-" });
                 await _context.SaveChangesAsync();
             }
+        }
 
+        private async Task CheckTipoAdquirenteAsync()
+        {
+            if (!_context.TiposAdquirente.Any())
+            {
+                _context.TiposAdquirente.Add(new TipoAdquirente { NombreCorto = "PF" , Adquirente = "Personas Físicas" });
+                _context.TiposAdquirente.Add(new TipoAdquirente { NombreCorto = "PM" , Adquirente = "Personas Morales" });
+                _context.TiposAdquirente.Add(new TipoAdquirente { NombreCorto = "PMC", Adquirente = "Personas Morales no Contribuyentes" });
+                _context.TiposAdquirente.Add(new TipoAdquirente { NombreCorto = "SI" , Adquirente = "Sociedades de Inversión" });
+                await _context.SaveChangesAsync();
+            }
         }
 
         private async Task CheckUserAsync(string firstName, string lastName, string email, string phone, string pwd, string role)

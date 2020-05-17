@@ -75,10 +75,11 @@ namespace Cofim.Web
 
             /*** INYECCION DE DEPENDENCIAS tres tipo: Transient(Solo se ejecuta una sola vez), singleton (carga en memoria se mantiene), scope (se inyecta cada vez que se necesita, crea una nueva instancia) ***/
             services.AddDbContext<DataContext>(cfg => { cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")); });
-            services.AddScoped<IUserHelper, UserHelper>();
-            services.AddScoped<IMailHelper, MailHelper>();
+            services.AddScoped<IUserHelper  , UserHelper>();
+            services.AddScoped<IMailHelper  , MailHelper>();
             services.AddScoped<ICombosHelper, CombosHelper>();
-            services.AddScoped<IMenuService, MenuService>();
+            services.AddScoped<IMenuService , MenuService>();
+            services.AddScoped<IEtlHelper   , EtlHelper>();
             services.AddTransient<SeedDb>();
             /*** INYECCION DE DEPENDENCIAS ***/
 
@@ -100,7 +101,7 @@ namespace Cofim.Web
             }
 
             //Register Syncfusion license
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjQ3Mjk5QDMxMzgyZTMxMmUzMElWRTNoYjJJQWFjYlRNdzc2R2RmRmxTN1BpL0NzUG0wcUwwMUpWczhxV0k9");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjU4MzMyQDMxMzgyZTMxMmUzME9PUkFzVVloTFc3cTd0T09pMmlTbGRQUVN2ekpSWG10bXJiL253ZlExYms9");
 
 
             app.UseStatusCodePagesWithReExecute("/error/{0}");

@@ -2329,25 +2329,25 @@ a {
 
 		}
 
-	input[type="text"],
-	input[type="password"],
-	input[type="email"],
-	select,
-	textarea {
-		-moz-appearance: none;
-		-webkit-appearance: none;
-		-ms-appearance: none;
-		appearance: none;
-		background: transparent;
-		border-radius: 0;
-		border: solid 2px;
-		color: inherit;
-		display: block;
-		outline: 0;
-		padding: 0 1rem;
-		text-decoration: none;
-		width: 100%;
-	}
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select,
+textarea {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	-ms-appearance: none;
+	appearance: none;
+	background: transparent;
+	border-radius: 5px;
+	border: solid 2px;
+	color: inherit;
+	display: inline-block;
+	outline: 0;
+	padding: 0 1rem;
+	text-decoration: none;
+	/*width: 100%;*/
+}
 
 		input[type="text"]:invalid,
 		input[type="password"]:invalid,
@@ -3023,19 +3023,19 @@ a {
 
 		table th {
 			font-family: "Source Sans Pro", Helvetica, sans-serif;
-			font-size: 0.8rem;
-			font-weight: 900;
+			font-size: 0.7rem;
+			font-weight: 700;
 			letter-spacing: 0.075em;
 			line-height: 1.5;
 			padding: 0 0.75rem 0.75rem 0.75rem;
-			text-align: left;
+			text-align: center;
 			text-transform: uppercase;
 		}
 
 			@media screen and (max-width: 980px) {
 
 				table th {
-					font-size: 0.9rem;
+					font-size: 0.7rem;
 				}
 
 			}

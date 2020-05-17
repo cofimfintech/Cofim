@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using MimeKit;
 using Cofim.Common;
+using Cofim.Common.Model.DataEntity;
 
 namespace Cofim.Web.Helpers
 {
@@ -100,24 +101,39 @@ namespace Cofim.Web.Helpers
         public void SendEmailAccountConfirmation(string to, string tokenLink) 
         {
             string Subject = "Cofim - Confirmación de Correo electrónico";
-            string Body = $"  <div style = 'width: 100%; text-align: center'>" +
-                          $"    <h2 style = 'color: #e67e22; margin: 0 0 7px'> Confirmación de Correo Electrónico </h2>" +
-                          $"    <br>Para completar el registro a la aplicación y Portal Web, por favor de Click en el siguiente enlace:<br><br> " +
-                          $"    <p> <a style = 'text-decoration: none; border-radius: 5px; padding: 11px 23px; color: white; background-color: #0366d6' href = \"{tokenLink}\">Confirmar cuenta de correo electrónico</a> </p>" +
-                          $"  </div>"
-                          ;
+            string Body    = $"  <div style = 'width: 100%; text-align: center'>" +
+                             $"    <h2 style = 'color: #e67e22; margin: 0 0 7px'> Confirmación de Correo Electrónico </h2>" +
+                             $"    <br>Para completar el registro a la aplicación y Portal Web, por favor de Click en el siguiente enlace:<br><br> " +
+                             $"    <p> <a style = 'text-decoration: none; border-radius: 5px; padding: 11px 23px; color: white; background-color: #0366d6' href = \"{tokenLink}\">Confirmar cuenta de correo electrónico</a> </p>" +
+                             $"  </div>"
+                             ;
             SendEmail(to, Subject, Body);
         }
 
         public void SendEmailRecoverPwd(string to, string tokenLink)
         {
             string Subject = "Cofim - Reestrablecer Contraseña";
+            string Body    = $"  <div style = 'width: 100%; text-align: center'>" +
+                             $"    <h2 style = 'color: #e67e22; margin: 0 0 7px'> Reestablecimiento de Contraseña </h2>" +
+                             $"    <br>Para reestrablecer la contraseña, por favor de Click en el siguiente enlace:<br><br> " +
+                             $"    <p> <a style = 'text-decoration: none; border-radius: 5px; padding: 11px 23px; color: white; background-color: #0366d6' href = \"{tokenLink}\">Reestablecer Contraseña</a> </p>" +
+                             $"  </div>"
+                             ;
+            SendEmail(to, Subject, Body);
+        }
+
+        public void SendEmailEtlLoad(string to, EtlProcessedFile etlProcessedFile)
+        {
+            string Subject = $"Cofim - Carga de Información {etlProcessedFile.TypeLoad}";
             string Body = $"  <div style = 'width: 100%; text-align: center'>" +
-                          $"    <h2 style = 'color: #e67e22; margin: 0 0 7px'> Reestablecimiento de Contraseña </h2>" +
-                          $"    <br>Para reestrablecer la contraseña, por favor de Click en el siguiente enlace:<br><br> " +
-                          $"    <p> <a style = 'text-decoration: none; border-radius: 5px; padding: 11px 23px; color: white; background-color: #0366d6' href = \"{tokenLink}\">Reestablecer Contraseña</a> </p>" +
-                          $"  </div>"
-                          ;
+                             $"    <h2 style = 'color: #e67e22; margin: 0 0 7px'> Resumen de carga de información </h2>" +
+                             $"    <p> Inicio de carga {etlProcessedFile.DateIni}. </p>" +
+                             $"    <p> Fin de carga {etlProcessedFile.DateEnd}. </p>" +
+                             $"    <p> Tiempo transcurrido {etlProcessedFile.ElapsedTime} segundos. </p>" +
+                             $"    <p> Número de registros {etlProcessedFile.LoadedRecords}. </p>" +
+                             $"    <p> Nombre del archivo {etlProcessedFile.FileName}. </p>" +
+                             $"  </div>"
+                             ;
             SendEmail(to, Subject, Body);
         }
 

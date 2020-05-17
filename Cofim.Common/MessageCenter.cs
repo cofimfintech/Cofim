@@ -7,7 +7,12 @@ namespace Cofim.Common
 {
     public static class MessageCenter
     {
-        /*******URL CONSTANT********/        
+
+        /*******URL CONSTANT********/
+        //public const String URL_FILE_MM = "https://d.docs.live.net/cf9a82c06b03d297/COFIM/MontosMinimosData.xlsx";
+        //public const String URL_FILE_VP = "https://d.docs.live.net/cf9a82c06b03d297/COFIM/vectorPrecios_20200331Data.xlsx";
+        public const String URL_FILE_MM = "MontosMinimosData.xlsx";
+        public const String URL_FILE_VP = "vectorPrecios_20200331Data.xlsx";
         public const String URL         = "https://cofim.azurewebsites.net/";
         public const String URL_API     = "https://cofim.azurewebsites.net/api/";
         public const String URL_IMG_APP = "https://Cofim.azurewebsites.net/images/app/";
@@ -68,6 +73,17 @@ namespace Cofim.Common
 
 
         /*******Common Messages********/
+        public const int    CUATRO_DIAS        = -4;
+        public const int    SIETE_DIAS         = -7;
+        public const int    UN_MES             = -30;
+        public const int    TRES_MESES         = -90;
+        public const int    SEIS_MESES         = -180;
+        public const int    NUEVE_MESES        = -270;
+        public const int    DOCE_MESES         = -360; 
+        public const int    DIECIOCHO_MESES    = -540;
+        public const int    VEINTICUATRO_MESES = -720;
+        public const int    TREINTAYSEIS_MESES = -1080;
+        public const char   FONDO_ACTIVO             = 'S';
         public const String slogan                   = "Desiciones Inteligentes";
         public const String productDescription       = "El mejor comparador de Fondos de Inversión de México.";
         public const String commonMessageChoose      = "[Por favor seleccione]";

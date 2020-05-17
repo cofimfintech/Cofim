@@ -17,12 +17,12 @@ namespace Cofim.Web.Controllers
     public class AccountController : Controller
     {
         private readonly IUserHelper   _userHelper;
-        private readonly ICombosHelper _combosHelper;
-        private readonly IMailHelper   _mailHelper;
+        private readonly ICombosHelper _combosHelper;        
         private readonly IMenuService  _menuService;
+        private readonly IMailHelper   _mailHelper;
         private readonly DataContext   _dataContext;
 
-        public AccountController(IUserHelper userHelper, ICombosHelper combosHelper, IMailHelper mailHelper, IMenuService menuService, DataContext context)
+        public AccountController(IUserHelper userHelper, ICombosHelper combosHelper, IMenuService menuService, IMailHelper mailHelper, DataContext context)
         {
             _userHelper   = userHelper;
             _combosHelper = combosHelper;
@@ -151,6 +151,7 @@ namespace Cofim.Web.Controllers
                                               LastName  = user.LastName,
                                               CellPhone = user.CellPhone
                                             };
+
             ViewBag.Title     = MessageCenter.webAppTitlePageEditUser;
             ViewBag.MenuLeft  = _menuService.GenerateMenuWebAppLeftHeader(User.Identity.IsAuthenticated, _userHelper.GetRol((User.Identity as ClaimsIdentity)).FirstOrDefault(), "PortalLogin");
             ViewBag.MenuRight = _menuService.GenerateMenuWebAppRightHeader(User.Identity.IsAuthenticated, User.Identity.Name);

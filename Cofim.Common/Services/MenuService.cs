@@ -73,15 +73,20 @@ namespace Cofim.Common.Services
                           Controller = "Usuarios",
                           Title      = "Usuarios"
                         },
-                new Menu{ Icon       = "fa fa-id-card",
+                new Menu{ Icon       = "fa fa-upload",
                           PageName   = "Index",
-                          Controller = "Tramites",
-                          Title      = "Tramites"
+                          Controller = "Etl",
+                          Title      = "Carga Info"
                         },
-                new Menu{ Icon       = "fa fa-address-card",
+                new Menu{ Icon       = "fa fa-briefcase",
                           PageName   = "Index",
-                          Controller = "TipoTramites",
-                          Title      = "Tipo de Tramite"
+                          Controller = "Portafolio",
+                          Title      = "Portafolios"
+                        },
+                new Menu{ Icon       = "fa fa-chart-bar",
+                          PageName   = "Index",
+                          Controller = "Rendimientos",
+                          Title      = "Rendimientos"
                         }
             };            
 
@@ -90,11 +95,16 @@ namespace Cofim.Common.Services
             if (IsAuthenticated && rol == RolesWebApp.Usuario)
                 return new List<Menu>
                 {
-                    new Menu{ Icon       = "fa fa-id-card",
-                              PageName   = "Index",
-                              Controller = "Portafolio",
-                              Title      = "Mi Portafolio"
-                            }
+                    new Menu{ Icon   = "fa fa-briefcase",
+                          PageName   = "Index",
+                          Controller = "Portafolios",
+                          Title      = "Mi Portafolio"
+                        },
+                new Menu{ Icon       = "fa fa-chart-bar",
+                          PageName   = "Index",
+                          Controller = "Rendimientos",
+                          Title      = "Rendimientos"
+                        }
                 };
 
             return new List<Menu> {  new Menu{ Icon       = "fa fa-home",

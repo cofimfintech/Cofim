@@ -1,0 +1,426 @@
+﻿@using Syncfusion.EJ2
+@model Cofim.Common.Model.Request.FilterFondoInversion
+
+@{
+    Layout = "~/Views/Shared/_LayoutPortal.cshtml";
+    ViewData["Title"] = "Home Rendimientos";
+}
+
+<!--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />-->
+<link rel="stylesheet" href="@Href("~/css/jquery.dataTables.min.css")" />
+<link rel="stylesheet" href="@Href("~/css/fixedHeader.dataTables.min.css")" />
+<link rel="stylesheet" href="@Href("~/css/responsive.dataTables.min.css")" />
+<link rel="stylesheet" href="@Href("~/css/rowGroup.dataTables.min.css")" />
+
+<!-- Main -->
+<div id="main">
+    <div id="ej2Tab">
+        <!---ej2Tab INI  -->
+        <div class="e-tab-header">
+            <div><i class="fas fa-chart-line" style="color:#007bff"> Directos </i></div>
+            <div><i class="fas fa-chart-area" style="color:#007bff"> Anualizados </i></div>
+            <div><i class="fas fa-project-diagram" style="color:#007bff"> Riesgos </i></div>
+        </div>
+        <div class="e-content">
+            <!--- e-content INI  -->
+            <div>
+                <!---DIRECTOS INI  -->
+                <form method="post">
+                    <p>&nbsp;</p>
+                    <div class="row">
+                        <div class="col-md-4 offset-md-1">
+                            <label>¿Cuánto piensas invertir?</label>
+                            <ejs-numerictextbox asp-for="MontoMinimo" name="MontoMinimo" id="MontoMinimo" ejs-for="@Model.MontoMinimo" format="c0" step="50000" value="100000" min="10000" max="100000000" Type="text"></ejs-numerictextbox>
+                        </div>
+                        <div class="col-md-4 offset-md-1">
+                            <label>Al cierre de</label>
+                            <ejs-datepicker ejs-for="@Model.StartDate" id="dateRendi" name="dateRendi" value="@Model.StartDate" min="@Model.EndDate" max="@Model.StartDate"></ejs-datepicker>
+                        </div>
+                        <div class="col-md-2">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 offset-md-1">
+                            <label>¿Tiene algún fondo de inversión en mente?</label>
+                            <ejs-multiselect name="SelectedFondos" id="SelectedFondos" ejs-for="@Model.FondosSelected" dataSource="@Model.FondosData" placeholder="Fondos" popupHeight="200px" enableGroupCheckBox="true" allowFiltering="true" filterBarPlaceholder="Buscar Fondo de Inversión" mode="CheckBox" enableSelectionOrder="true">
+                                <e-multiselect-fields groupBy="Category" value="Id" text="Name"></e-multiselect-fields>
+                            </ejs-multiselect>
+                        </div>
+
+                        <div class="col-md-4 offset-md-1">
+                            <label>¿Qué tipo de persona realizará la inversión?</label>
+                            <ejs-multiselect name="SelectedAdquirente" id="SelectedAdquirente" ejs-for="@Model.AdquirentesSelected" dataSource="@Model.AdquirentesData" placeholder="Tipo de Persona" mode="CheckBox" enableSelectionOrder="true">
+                                <e-multiselect-fields value="Id" text="Name"></e-multiselect-fields>
+                            </ejs-multiselect>
+                        </div>
+
+                        <div class="col-md-2">
+                            <span id="btnBuscar" class="button">Buscar</span>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="row">
+                    <div class="col-md-2"> <i id="iconGrid" class="icon-pressed-shadow fas fa-1x fa-align-justify"></i> | <i id="iconChart" class="icon-shadow fa fa-1x fa-chart-bar"> </i> </div>
+                    <div class="col-md-10 divGrid" id="GridRendimiento_colShowHide">
+                        Columns:
+                        <ejs-checkbox id="Checkbox3"  data-column="3"  checked="true"  label="4 días" show-rounded-corner="true" size="Small" class="myCheckBox"></ejs-checkbox>
+                        <ejs-checkbox id="Checkbox4"  data-column="4"  checked="true"  label="7 días" show-rounded-corner="true" size="Small" class="myCheckBox"></ejs-checkbox>
+                        <ejs-checkbox id="Checkbox5"  data-column="5"  checked="true"  label="1 mes" show-rounded-corner="true" size="Small" class="myCheckBox"></ejs-checkbox>
+                        <ejs-checkbox id="Checkbox6"  data-column="6"  checked="true"  label="3 meses" show-rounded-corner="true" size="Small" class="myCheckBox"></ejs-checkbox>
+                        <ejs-checkbox id="Checkbox7"  data-column="7"  checked="true"  label="6 meses" show-rounded-corner="true" size="Small" class="myCheckBox"></ejs-checkbox>
+                        <ejs-checkbox id="Checkbox8"  data-column="8"  checked="true"  label="9 meses" show-rounded-corner="true" size="Small" class="myCheckBox"></ejs-checkbox>
+                        <ejs-checkbox id="Checkbox9"  data-column="9"  checked="true"  label="12 meses" show-rounded-corner="true" size="Small" class="myCheckBox"></ejs-checkbox>
+                        <ejs-checkbox id="Checkbox10" data-column="10" checked="false" label="18 meses" show-rounded-corner="true" size="Small" class="myCheckBox"></ejs-checkbox>
+                        <ejs-checkbox id="Checkbox11" data-column="11" checked="false" label="24 meses" show-rounded-corner="true" size="Small" class="myCheckBox"></ejs-checkbox>
+                        <ejs-checkbox id="Checkbox12" data-column="12" checked="false" label="36 meses" show-rounded-corner="true" size="Small" class="myCheckBox"></ejs-checkbox>
+                    </div>
+                    <div class="col-md-12 divGrid">
+                        <table id="GridRendimiento" class="display compact hover" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2">Operadora</th>
+                                    <th rowspan="2">Fondo</th>
+                                    <th rowspan="2">Serie</th>
+                                    <th colspan="9">Directos</th>
+                                    <th colspan="10">Anualizado</th>
+                                </tr>
+                                <tr>
+                                    <th>4 Días</th>
+                                    <th>7 Días</th>
+                                    <th>1 Mes</th>
+                                    <th>3 Meses</th>
+                                    <th>6 Meses</th>
+                                    <th>9 Meses</th>
+                                    <th>12 Meses</th>
+                                    <th>18 Meses</th>
+                                    <th>24 Meses</th>
+                                    <th>36 Meses</th>
+                                    <th>4 Días</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Operadora</th>
+                                    <th>Fondo</th>
+                                    <th>Serie</th>
+                                    <th>4 Días</th>
+                                    <th>7 Días</th>
+                                    <th>1 Mes</th>
+                                    <th>3 Meses</th>
+                                    <th>6 Meses</th>
+                                    <th>9 Meses</th>
+                                    <th>12 Meses</th>
+                                    <th>18 Meses</th>
+                                    <th>24 Meses</th>
+                                    <th>36 Meses</th>
+                                    <th>4 Días</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="col-md-12" id="divChart">
+                        <div class="control-section">
+                            <div id="stacked100FI" align="center">No data available to display</div>
+                        </div>
+                    </div>
+                </div>
+                <!---DIRECTOS END  -->
+            </div>
+            <div>
+                <!---ANUAL INI  -->
+                <form method="post">
+                    <p>&nbsp;</p>
+                    <div class="row">
+                        <div class="col-md-4 offset-md-1">
+                            <label>¿Cuánto piensas invertir?</label>
+                            <ejs-numerictextbox asp-for="MontoMinimo" name="MontoMinimoAnual" id="MontoMinimoAnual" ejs-for="@Model.MontoMinimo" format="c0" step="50000" value="100000" min="10000" max="100000000" Type="text"></ejs-numerictextbox>
+                        </div>
+                        <div class="col-md-4 offset-md-1">
+                            <label>Al cierre de</label>
+                            <ejs-datepicker ejs-for="@Model.StartDate" id="dateRendiAnualIni" name="dateRendiAnualIni" value="@Model.StartDate" min="@Model.EndDate" max="@Model.StartDate"></ejs-datepicker>
+                        </div>
+                        <div class="col-md-2">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 offset-md-1">
+                            <label>¿Tiene algún fondo de inversión en mente?</label>
+                            <ejs-multiselect name="SelectedFondosAnual" id="SelectedFondosAnual" ejs-for="@Model.FondosSelected" dataSource="@Model.FondosData" placeholder="Fondos" popupHeight="200px" enableGroupCheckBox="true" allowFiltering="true" filterBarPlaceholder="Buscar Fondo de Inversión" mode="CheckBox" enableSelectionOrder="true">
+                                <e-multiselect-fields groupBy="Category" value="Id" text="Name"></e-multiselect-fields>
+                            </ejs-multiselect>
+                        </div>
+
+                        <div class="col-md-4 offset-md-1">
+                            <label>¿Qué tipo de persona realizará la inversión?</label>
+                            <ejs-multiselect name="SelectedAdquirenteAnual" id="SelectedAdquirenteAnual" ejs-for="@Model.AdquirentesSelected" dataSource="@Model.AdquirentesData" placeholder="Tipo de Persona" mode="CheckBox" enableSelectionOrder="true">
+                                <e-multiselect-fields value="Id" text="Name"></e-multiselect-fields>
+                            </ejs-multiselect>
+                        </div>
+
+                        <div class="col-md-2">
+                            <span id="btnBuscarAnual" class="button">Buscar</span>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="row">
+                    grid anual
+                </div>
+                <!---ANUAL END  -->
+            </div>
+            <div>
+                <div class="row">
+                    <!---RIESGOS INI  -->
+                    <div id="containerHMFI" align="center"> </div>
+                    <!---RIESGOS END  -->
+                </div>
+            </div>
+        </div><!--- e-content INI  -->
+    </div><!---ej2Tab INI  -->
+</div><!-- Main -->
+
+@section Scripts{    
+    <script src="~/js/jquery.dataTables.min.js">    </script>
+    <script src="~/js/dataTables.responsive.min.js"></script>
+    <script src="~/js/fixedHeader.dataTables.js">   </script>
+    <script src="~/js/rowGroup.dataTables.js">      </script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            /************************ TABS INI  **********************/
+            var tabObj = new ej.navigations.Tab({ heightAdjustMode: "Content"});
+            tabObj.appendTo('#ej2Tab');
+           /************************ TABS INI  **************************/
+
+            
+           /************************ DIRECTOS INI  **********************/
+            var groupColumn = 0;
+            var table = $('#GridRendimiento').DataTable({
+                //   "language"   : { "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json" },
+                "fixedHeader": { header: true, footer: true },
+                "processing": true,
+                "serverSide": true,
+                "filter"    : true,
+                "orderMulti": false,
+                "responsive": true,
+                "lengthMenu": [10, 25, 50, 100],
+                "ajax": {
+                    "url": "/Rendimientos/LoadDataDirectos",
+                    "type": "POST",
+                    "datatype": "json",
+                    "data": {
+                        montoMinimo        : function () { return formatMontoMinimo(document.getElementById('MontoMinimo').ej2_instances[0].value) },
+                        StartDate          : function () { return formatDate(document.getElementById('dateRendi').ej2_instances[0].value) },
+                        AdquirentesSelected: function () { return String(document.getElementById('SelectedAdquirente').ej2_instances[0].value) },
+                        FondosSelected     : function () { return String(document.getElementById('SelectedFondos').ej2_instances[0].value) },
+                    },
+                    "beforeSend": function () { },
+                    "complete"  : function () { ShowHideToolsGrid(table, "GridRendimiento");
+                                                $("#GridRendimiento_filter").addClass("col-md-6");
+                                                $("#GridRendimiento_length").addClass("col-md-6");
+                                              }
+                },
+                "columnDefs": [{ "visible": false, "targets": groupColumn }],
+                "columns": [{ "data": "operadora", "name": "Operadora" }, //0
+                { "data": "fondo", "name": "Fondo" },//1
+                { "data": "serie", "name": "Serie" },//2
+                { "data": "directo4Dias", "name": "Directo 4 Días" },//3
+                { "data": "directo7Dias", "name": "Directo 7 Días" },//4
+                { "data": "directo1Mes", "name": "Directo 1 Mes" },//5
+                { "data": "directo3Meses", "name": "Directo 3 Meses" },//6
+                { "data": "directo6Meses", "name": "Directo 6 Meses" },//7
+                { "data": "directo9Meses", "name": "Directo 9 Meses" },//8
+                { "data": "directo12Meses", "name": "Directo 12 Meses" },//9
+                { "data": "directo18Meses", "name": "Directo 18 Meses" },//10
+                { "data": "directo24Meses", "name": "Directo 24 Meses" },//11
+                { "data": "directo36Meses", "name": "Directo 36 Meses" },//12
+                { "data": "anual4Dias", "name": "Anual 4 Días" },//13
+                ],
+                "order": [[groupColumn, 'asc']],
+                "drawCallback": function (settings) {
+                    var api  = this.api();
+                    var rows = api.rows({ page: 'current' }).nodes();
+                    var last = null;
+
+                    api.column(groupColumn, { page: 'current' }).data().each(function (group, i) {
+                        if (last !== group) {
+                            $(rows).eq(i).before('<tr class="group"><td colspan="12">' + group + '</td></tr>');
+                            last = group;
+                        }
+                    });
+                },
+                "responsive": {
+                    breakpoints: [{ name: 'bigdesktop', width: Infinity },
+                                  { name: 'meddesktop', width: 1480 },
+                                  { name: 'smalldesktop', width: 1280 },
+                                  { name: 'medium', width: 1188 },
+                                  { name: 'tabletl', width: 1024 },
+                                  { name: 'btwtabllandp', width: 848 },
+                                  { name: 'tabletp', width: 768 },
+                                  { name: 'mobilel', width: 480 },
+                                  { name: 'mobilep', width: 320 }
+                                ]
+                },
+            });
+
+            ShowHideToolsGrid(table, "GridRendimiento");           
+
+            $('#GridRendimiento tbody').on('click', 'tr.group', function () {
+                var currentOrder = table.order()[0];
+                if ( currentOrder[0] === groupColumn && currentOrder[1] === 'asc')
+                     { table.order([groupColumn, 'desc']).draw(); }
+                else { table.order([groupColumn, 'asc' ]).draw(); }
+            });
+
+            $("#btnBuscar").click(function () { table.ajax.reload();
+                                                chartLoadRendimientosDirectos();
+                                               });
+            $("#divChart").hide();
+            $("#iconGrid").addClass("addCursor").click(function () {
+                $(".divGrid").show();
+                $(this).removeClass('icon-shadow').addClass('icon-pressed-shadow');
+                $("#iconChart").removeClass('icon-pressed-shadow').addClass('icon-shadow');
+                $("#divChart").hide();
+            });
+            $("#iconChart").addClass("addCursor").click(function () {                  
+
+                $(".divGrid").hide();
+                $(this).removeClass('icon-shadow').addClass('icon-pressed-shadow');
+                $("#iconGrid").removeClass('icon-pressed-shadow').addClass('icon-shadow');
+                $("#divChart").show();
+            });
+
+
+            $('.myCheckBox').on('click', function (e) {
+                e.preventDefault();
+                var column = table.column($(this).attr('data-column'));
+                column.visible(!column.visible());
+            });
+        });
+
+        function chartLoadRendimientosDirectos() {
+            $.ajax({
+            type : "POST",
+            url  : '@Url.Action("ChartDataDirectos", "Rendimientos")',
+            async: false,
+            data : {
+                        montoMinimo        : function () { return formatMontoMinimo(document.getElementById('MontoMinimo').ej2_instances[0].value) },
+                        StartDate          : function () { return formatDate(document.getElementById('dateRendi').ej2_instances[0].value) },
+                        AdquirentesSelected: function () { return String(document.getElementById('SelectedAdquirente').ej2_instances[0].value) },
+                        FondosSelected     : function () { return String(document.getElementById('SelectedFondos').ej2_instances[0].value) },
+                    },
+                success: function (chartData) {
+
+                    var chart = new ej.charts.Chart({
+                        //Initializing Primary X Axis
+                        primaryXAxis: {
+                            majorGridLines: { width: 0 }, minorGridLines: { width: 0 },
+                            majorTickLines: { width: 0 }, minorTickLines: { width: 0 },
+                            interval: 1, lineStyle: { width: 0 }, valueType: 'Category'
+                        },
+                        primaryYAxis:
+                        {
+                            title: 'Rendimientos Directos', lineStyle: { width: 0 }, interval: 20, minorTickLines: { width: 0 },
+                            majorTickLines: { width: 0 }, majorGridLines: { width: 1 }, minorGridLines: { width: 1 },
+                        },
+                        chartArea: { border: { width: 0 } },
+                        series: chartData,
+                        tooltip: { enable: true,
+                                   format: '${point.x} : <b>${point.y}</b>'
+                                 },
+                        title: 'Comparación de Rendimientos Directos',
+                        width: ej.base.Browser.isDevice ? '100%' : '90%',
+                        load : function (args) {
+                                    var stackedTheme = location.hash.split('/')[1];
+                                    stackedTheme     = stackedTheme ? stackedTheme : 'Material';
+                                    args.chart.theme = (stackedTheme.charAt(0).toUpperCase() +
+                                    stackedTheme.slice(1)).replace(/-dark/i, 'Dark').replace(/contrast/i, 'Contrast');
+                                }
+                    });                    
+                    chart.appendTo('#stacked100FI');               
+            }
+        });
+        }//function chartLoadRendimientos
+
+        function ShowHideToolsGrid(table, grid)
+        {
+            if (table.data().count())      
+            {
+                $("#" + grid + "_length"  ).show();
+                $("#" + grid + "_filter"  ).show();
+                $("#" + grid + "_info"    ).show();
+                $("#" + grid + "_paginate").show();
+                $("#" + grid + "_colShowHide").show();
+                table.column("10").visible(false);
+                table.column("11").visible(false);
+                table.column("12").visible(false);
+            }
+            else
+            {
+                $("#" + grid + "_length").hide();
+                $("#" + grid + "_filter").hide();
+                $("#" + grid + "_info").hide();
+                $("#" + grid + "_paginate").hide();
+                $("#" + grid + "_colShowHide").hide();
+            }
+        }
+        /************************ DIRECTOS END  **********************/
+
+        /*************************  ANUAL INI *************************/
+        /************************** ANUAL END ************************/
+
+        /**************************** RIESGOS INI ************************/
+        var heatmapData = [
+            [73, 39, 26, 39, 94, 0],
+            [93, 58, 53, 38, 26, 68],
+            [99, 28, 22, 4, 66, 90],
+            [14, 26, 97, 69, 69, 3],
+            [7, 46, 47, 47, 88, 6],
+            [41, 55, 73, 23, 3, 79],
+            [56, 69, 21, 86, 3, 33],
+            [45, 7, 53, 81, 95, 79],
+            [60, 77, 74, 68, 88, 51],
+            [25, 25, 10, 12, 78, 14],
+            [25, 56, 55, 58, 12, 82],
+            [74, 33, 88, 23, 86, 59]];
+
+        var heatmap = new ej.heatmap.HeatMap({
+            titleSettings: { text     : 'Comparacion Mapa de Fondos',
+                             textStyle: { size: '15px', fontWeight: '500', fontStyle: 'Normal', fontFamily: 'Segoe UI' }
+                           },
+            xAxis: { labels: ['Nancy', 'Andrew', 'Janet', 'Margaret', 'Steven', 'Michael', 'Robert', 'Laura', 'Anne', 'Paul', 'Karin', 'Mario'], },
+            yAxis: { labels: ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'], },
+            cellSettings: { showLabel: false, },
+            paletteSettings: {
+                palette: [
+                    { value: 0, color: '#C2E7EC' },
+                    { value: 10, color: '#AEDFE6' },
+                    { value: 20, color: '#9AD7E0' },
+                    { value: 30, color: '#72C7D4' },
+                    { value: 40, color: '#5EBFCE' },
+                    { value: 50, color: '#4AB7C8' },
+                    { value: 60, color: '#309DAE' },
+                    { value: 70, color: '#2B8C9B' },
+                    { value: 80, color: '#206974' },
+                    { value: 90, color: '#15464D' },
+                    { value: 100, color: '#000000' },
+                ],
+                type: 'Fixed'
+            },
+            dataSource: heatmapData,
+            legendSettings: {
+                position: 'Bottom',
+                width: '85%',
+                enableSmartLegend: true,
+                title: { text: "Riesgo"}
+            }
+        });
+        heatmap.appendTo('#containerHMFI');
+
+        /**************************** RIESGOS END ************************/
+    </script>
+}

@@ -31,7 +31,13 @@ namespace Cofim.Common.Model.Response
         [Display(Name = "Nombre del Usuario")]
         public string FullName => $"{FirstName} {LastName}";
 
-        
-        
+        [Display(Name = "Dirección Fiscal")]
+        public DatosFiscalesResponse DatosFiscalesResponse { get; set; }
+
+        [Display(Name = "Formas de Pago")]
+        public ICollection<FormaDePagoResponse> FormasDePago { get; set; }
+
+
+
     }//CLASS
 }//NAMESPACE

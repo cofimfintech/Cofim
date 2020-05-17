@@ -193,34 +193,34 @@
       <Version>1.0.25.3</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.Buttons">
-      <Version>18.1.0.45</Version>
+      <Version>18.1.0.52</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.Buttons.IOS">
-      <Version>18.1.0.45</Version>
+      <Version>18.1.0.52</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.Core">
-      <Version>18.1.0.45</Version>
+      <Version>18.1.0.52</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.Expander">
-      <Version>18.1.0.45</Version>
+      <Version>18.1.0.52</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfBusyIndicator">
-      <Version>18.1.0.45</Version>
+      <Version>18.1.0.52</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfBusyIndicator.IOS">
-      <Version>18.1.0.45</Version>
+      <Version>18.1.0.52</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox">
-      <Version>18.1.0.45</Version>
+      <Version>18.1.0.52</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox.IOS">
-      <Version>18.1.0.45</Version>
+      <Version>18.1.0.52</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfRotator">
-      <Version>18.1.0.45</Version>
+      <Version>18.1.0.52</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfRotator.IOS">
-      <Version>18.1.0.45</Version>
+      <Version>18.1.0.52</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugin.Connectivity">
       <Version>3.2.0</Version>
@@ -228,7 +228,7 @@
     <PackageReference Include="Xamarin.FFImageLoading.Forms">
       <Version>2.4.11.982</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.6.0.726" />
+    <PackageReference Include="Xamarin.Forms" Version="4.6.0.772" />
     <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1422" />
   </ItemGroup>
   <ItemGroup>

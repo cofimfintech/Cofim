@@ -11,7 +11,7 @@ using Cofim.Common.Services;
 using Cofim.Web.Helpers;
 using Cofim.Web.Models;
 
-namespace tramiauto.Web.Controllers
+namespace Cofim.Web.Controllers
 {
     public class HomeController : Controller
     {
@@ -19,7 +19,7 @@ namespace tramiauto.Web.Controllers
         private readonly IMenuService _menuService;
         private readonly IUserHelper  _userHelper;
 
-        public HomeController(ILogger<HomeController> logger, IUserHelper userHelper, IMenuService menuService)
+        public HomeController(ILogger<HomeController> logger, IMenuService menuService, IUserHelper userHelper)
         {
             _logger      = logger;
             _menuService = menuService;

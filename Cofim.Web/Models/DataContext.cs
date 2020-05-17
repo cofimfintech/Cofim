@@ -13,13 +13,15 @@ namespace Cofim.Web.Models
         {
         }
 
-        public DbSet<VectorPrecioBMV> VectorPreciosBMV { get; set; }
+        public DbSet<FondosInversionMontosMinimos> FondosInversionMontosMinimos { get; set; }
+        public DbSet<VectorPrecio>     VectorPrecios     { get; set; }                
+        public DbSet<Usuario>          Usuarios          { get; set; }
+        public DbSet<DatosFiscales>    DatosFiscales     { get; set; }
+        public DbSet<StatusWebApp>     StatusWebApp      { get; set; }                        
+        public DbSet<FormaDePago>      FormasDePago      { get; set; }
+        public DbSet<TipoAdquirente>   TiposAdquirente   { get; set; }
+        public DbSet<EtlProcessedFile> EtlProcessedFiles { get; set; }
 
-        public DbSet<FondoInversion>  FondosInversion { get; set; }
-        
-        public DbSet<Usuario>         Usuarios        { get; set; }
-        public DbSet<DatosFiscales>   DatosFiscales   { get; set; }
-        public DbSet<StatusWebApp>    StatusWebApp    { get; set; }                        
-        public DbSet<FormaDePago>     FormasDePago    { get; set; }
     }//class
+
 }//NameSpace
